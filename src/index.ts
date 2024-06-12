@@ -1,30 +1,24 @@
 // src/index.ts
 import express, { Express, Request, Response } from "express";
+import cors from "cors";
 import dotenv from "dotenv";
 
-/*
- * Load up and parse configuration details from
- * the `.env` file to the `process.env`
- * object of Node.js
- */
+// Initialize dotenv to read and parse `.env` file contents into `process.env`.
 dotenv.config();
 
-/*
- * Create an Express application and get the
- * value of the PORT environment variable
- * from the `process.env`
- */
+// Instantiate an Express application and store it in the variable 'app'.
 const app: Express = express();
 const port = process.env.PORT || 5001;
 
-/* Define a route for the root path ("/")
- using the HTTP GET method */
+// Apply CORS middleware to the Express app to allow cross-origin requests.
+app.use(cors());
+
+// Define a GET route on the root path ('/') that responds with a simple message.
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server");
 });
 
-/* Start the Express app and listen
- for incoming requests on the specified port */
+// Start the Express app and listen for incoming requests on the specified port
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
