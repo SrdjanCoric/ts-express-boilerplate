@@ -2,6 +2,8 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+// name this import depending on what routes correspond to productAPI or commentsAPI
+import apiRoutes from "./routes/routes";
 
 // Initialize dotenv to read and parse `.env` file contents into `process.env`.
 dotenv.config();
@@ -13,7 +15,8 @@ const port = process.env.PORT || 5001;
 // Apply CORS middleware to the Express app to allow cross-origin requests.
 app.use(cors());
 
-// Define a GET route on the root path ('/') that responds with a simple message.
+app.use("/api", apiRoutes);
+
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server");
 });
